@@ -23,7 +23,7 @@ for k, v in enumerate(xpath_passos):
 options = {
     'quiet': ''
 }
-caminho = '//10.51.102.90/Roteiros/_CONTROLES/_Relatorios_impressorasOKI'
+caminho = 'caminho da pasta de rede'
 from_url('http://localhost:81/PrintSuperVision/UsageReport.aspx?PG_ID=0&format=webNew&cmdReport=Exibir',
          f'{caminho}/relatorio_impressoras_{formata_data()}.pdf',
          options=options
