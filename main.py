@@ -1,32 +1,38 @@
-from lib import *
-from pdfkit import configuration, from_url
+from pdfkit import from_url
+from datetime import datetime
+from lib.navegacao import Navegar
 
 alerta('Iniciando Geração de relatório.', 'Aguarde uns instantes, qualquer coisa vamos te avisarei quando terminar.')
-nav = abre_link('http://localhost:81/PrintSuperVision/Default.htm')
-xpath_passos = [
-    '/html/body/table[1]/tbody/tr/td[4]/a/span',
-    {
-        'username': 'admin',
-        'password': 'aaaaaa'
-    },
-    '/html/body/form/blockquote/table/tbody/tr[3]/td/input',
-    '//*[@id="PSVmenu_2894"]/a',
-    '/html/body/p/table/tbody/tr[1]/td[2]/a',
-    '//*[@id="btnCollect"]',
-    '/html/body/form/p[5]/input'
-]
-for k, v in enumerate(xpath_passos):
-    if k == 1:
-        escreva_texto(nav, v)
-    else:
-        navegar_site(nav, v)
+
+site = 'http://localhost:81/PrintSuperVision/LoginForm.aspx'
+dirDriver = 'D:\\Temp\\scripts\\webdriver'
+siteWebdriver = 'https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/'
+
+pastaSalvarPDF = 'caminho da pasta de rede'
+dia = datetime.today().day
+mes = datetime.today().month
+ano = datetime.today().year
+dataHoje = f"{dia}-{mes}-{ano}"
+
+xpath_passos = {
+    '//input[@name="username"]': 'admin',
+    '//input[@name="password"]': 'aaaaaa',
+    '//input[@name="submit"]': '',
+    '//*[@id="PSVmenu_2894"]/a': '', #Botão Serviços
+    '/a[@href="DataCollect.aspx"]': '', #Botão de serviço de coleta de dados
+    '//*[@id="btnCollect"]': '',
+    '//input[@name="cmd"]': ''
+}
+nav = Navegar(site, dirDriver, siteWebdriver, xpath_passos)
+
 options = {
     'quiet': ''
 }
-caminho = 'caminho da pasta de rede'
+
+
 from_url('http://localhost:81/PrintSuperVision/UsageReport.aspx?PG_ID=0&format=webNew&cmdReport=Exibir',
-         f'{caminho}/relatorio_impressoras_{formata_data()}.pdf',
+         f'{pastaSalvarPDF}/relatorio_impressoras_{dataHoje}.pdf',
          options=options
          )
 nav.quit()
-alerta('Relatório concluido.', f'Confira a pasta: {caminho}. Em sua rede.')
+alerta('Relatório concluido.', f'Confira a pasta: {pastaSalvarPDF}. Em sua rede.')
