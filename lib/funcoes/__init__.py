@@ -1,5 +1,5 @@
 import pymsgbox
 
 def mensagem(titulo, texto, tempo=3000):
-    criador = " Criado Por: Nome."
+    criador = " Desenvolvido por: Yasser Ibrahim."
     return pymsgbox.alert(text=texto, title=titulo + criador, timeout=tempo)
