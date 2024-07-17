@@ -211,9 +211,8 @@ for setor, site in site_impressoras_multifuncional.items():
 
     mensagem("Criação de PDF.", f"PDF do setor {setor} finalizado.")
 
-mensagem("Finalizando", f"Finalizando Gerador de relatório. Até a próxima.")
-
-
-mensagem("Abrindo pasta.", "Abrindo pasta com os relatórios.")
+mensagem("Tudo pronto.", f"Verfique se foram feitos todos os relatórios das impressoras.")
 
 abrir_pasta(caminho_do_arquivo=diretorio_rede_salvar_pdf)
+
+mensagem("Finalizando", f"Finalizando Gerador de relatório. Até a próxima.")

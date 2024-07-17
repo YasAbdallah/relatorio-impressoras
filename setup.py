@@ -17,9 +17,10 @@ options = {
         'subprocess',
     ], 
     'excludes': ['tkinter'],
-    "include_files": ["icon2.ico", "lib/"],
+    "include_files": "icon2.ico",
     "include_msvcr": True,
-    "optimize": 2
+    "optimize": 2,
+    
     }
 
 base = None
@@ -29,7 +30,14 @@ if sys.platform == 'win32':
 setup(
     name='Geração de relatório de impressoras',
     version='1.3',
-    description='Gerador de relatório automatico das impressoras de rede da marca HP. Desennvolvido por: Yasser Ibrahim Abdallah Vaz Condoluci.',
+    description='Gerador de relatório automatico das impressoras de rede da marca HP. Desenvolvido por: Yasser Ibrahim Abdallah Vaz Condoluci.',
     options={'build.exe': options},
-    executables=[Executable('impressoras_HP.py', base=base, icon="icon2.ico")]
+    executables=[
+        Executable(
+            'src/impressoras_HP.py', 
+            base=base, 
+            target_name="impressoras_HP.exe", 
+            icon="img/icon2.ico", 
+            shortcut_name='impressoras_HP', 
+            shortcut_dir='Relatorio_impressoras')]
 )
